@@ -64,7 +64,7 @@ export const Hero: React.FC<HeroProps> = ({
                   : 'border-neutral-300 text-neutral-700 hover:border-black hover:text-black bg-neutral-50'
               }`}
             >
-              <span className="sm:hidden">PARKOUR COORDINATOR</span>
+              <span className="sm:hidden">PARKOUR COORDINATION</span>
               <span className="hidden sm:inline">Parkour Coordination</span>
             </button>
 
