@@ -21,7 +21,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'SHOWREELS', id: 'showreels' },
     { label: 'ABOUT', id: 'about' },
     { label: 'CONTACT', id: 'contact' },
-    { label: 'CLIENTS', id: 'clients' },
   ];
 
   const handleLinkClick = (id: string) => {
