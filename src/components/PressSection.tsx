@@ -133,7 +133,7 @@ export const PressSection: React.FC<PressProps> = ({ isDarkMode }) => {
               ))}
             </div>
           </div>
-          <p className="mt-3 font-mono text-[10px] lg:text-xs opacity-60">Select a photograph to view it in full-size.</p>
+          <p className="mt-3 font-mono text-[10px] opacity-60 lg:hidden">Select a photograph to view it in full-size.</p>
         </div>
 
       </div>
