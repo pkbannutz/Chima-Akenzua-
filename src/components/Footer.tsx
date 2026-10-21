@@ -17,14 +17,6 @@ export const Footer: React.FC<FooterProps> = ({ isDarkMode, onScrollToTop }) => 
 
         <div className="flex flex-wrap items-center gap-6 opacity-75">
           <a
-            href="https://www.thetalentmanager.com/talent/115201/chima-akenzua"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline hover:opacity-100"
-          >
-            TALENT MANAGER
-          </a>
-          <a
             href="https://www.imdb.com/name/nm4623133/"
             target="_blank"
             rel="noopener noreferrer"
@@ -41,7 +33,7 @@ export const Footer: React.FC<FooterProps> = ({ isDarkMode, onScrollToTop }) => 
             AJK AGENCY
           </a>
           <a
-            href="https://www.instagram.com/chimaparkour/"
+            href="https://www.instagram.com/chimaakenzua/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:underline hover:opacity-100"
