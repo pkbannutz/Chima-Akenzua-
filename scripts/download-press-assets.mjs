@@ -67,14 +67,16 @@ for (const [label, url] of [
     const wixVideoIds = [...new Set(html.match(/(?:11062b|690b17)_[a-f0-9]{32}/g) || [])];
     const videoUrls = [...new Set(html.match(/https:\/\/video\.wixstatic\.com\/video\/[^"'<> ]+/g) || [])];
     console.log('VIDEO SOURCE AUDIT', label, 'HTTP', response.status, JSON.stringify({ wixVideoIds: wixVideoIds.slice(0, 60), videoUrls: videoUrls.slice(0, 25) }));
-    const decoded = html.replaceAll('\\\\/', '/').replaceAll('\\\\u002F', '/').replaceAll('&quot;', '"');
-    const links = [...new Set([...decoded.matchAll(/(?:https?:)?\\/\\/(?:player\\.vimeo\\.com|vimeo\\.com|youtube\\.com|youtu\\.be|video\\.wixstatic\\.com|repackager\\.wixmp\\.com)[^"<>\\s]{0,180}/g)].map(x => x[0]))];
-    console.log('VIDEO LINKS', label, JSON.stringify(links.slice(0, 30)));
-    for (const term of ['Play Direction & Coordination Reel','Play Action Reel','vimeo','wix:video://','videoId','videoUrl','videoSource','player.vimeo','m3u8']) {
-      const pos = decoded.toLowerCase().indexOf(term.toLowerCase());
-      if (pos !== -1) console.log('VIDEO CONTEXT', label, term, decoded.slice(Math.max(0, pos - 120), pos + 320));
+    const decoded = html.split('\\\\/').join('/').split('\\\\u002F').join('/');
+    for (const term of ['player.vimeo.com', 'vimeo.com', 'youtube.com', 'wix:video://', 'video.wixstatic.com/video/', 'videoId', 'videoUrl', 'videoSource', 'Play Direction', 'Action Reel', 'm3u8', '.mp4']) {
+      let from = 0;
+      for (let n = 0; n < 5; n++) {
+        const pos = decoded.toLowerCase().indexOf(term.toLowerCase(), from);
+        if (pos < 0) break;
+        console.log('REEL EMBED', label, term, n, decoded.slice(Math.max(0, pos - 90), pos + 220));
+        from = pos + term.length;
+      }
     }
-
   } catch (error) {
     console.log('VIDEO SOURCE AUDIT', label, String(error));
   }
