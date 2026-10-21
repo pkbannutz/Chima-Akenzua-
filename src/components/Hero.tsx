@@ -21,7 +21,7 @@ export const Hero: React.FC<HeroProps> = ({
         
         {/* Left Typographic Column (col-span-7) */}
         <div className="md:col-span-7 flex flex-col justify-center lg:-translate-y-10">
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tighter uppercase font-mono leading-none">
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tighter uppercase font-mono leading-none lg:-translate-x-3">
             CHIMA AKENZUA
           </h1>
 
