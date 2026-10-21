@@ -133,3 +133,44 @@
   }
   .press-magazine-track { animation: none; will-change: auto; }
 }
+
+/* Custom accessible scrubber for both showreels, including inline iPhone playback. */
+.reel-seek-bar {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  border: 0;
+  border-radius: 99px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.reel-seek-bar::-webkit-slider-runnable-track {
+  height: 5px;
+  background: transparent;
+}
+.reel-seek-bar::-moz-range-track {
+  height: 5px;
+  background: transparent;
+}
+.reel-seek-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #141414;
+  box-shadow: 0 0 0 1px #888;
+}
+.reel-seek-bar::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #141414;
+}
+.reel-seek-bar:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}
