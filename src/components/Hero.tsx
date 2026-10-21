@@ -88,8 +88,8 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
         </div>
 
-        {/* Right Sharp Image Column (col-span-5) */}
-        <div className="md:col-span-5">
+        {/* Hero portrait and compact specs card */}
+        <div className="md:col-span-5 space-y-4">
           <div className={`relative border overflow-hidden ${
             isDarkMode ? 'border-neutral-800 bg-neutral-950' : 'border-neutral-200 bg-neutral-50'
           }`}>
@@ -98,11 +98,30 @@ export const Hero: React.FC<HeroProps> = ({
               alt="Chima Akenzua - Parkour Coordinator and Stunt Performer"
               className="w-full aspect-4/5 object-cover object-top grayscale contrast-110"
             />
-            <div className={`p-3 border-t font-mono text-[11px] tracking-wider uppercase flex justify-between ${
-              isDarkMode ? 'border-neutral-800 bg-black text-neutral-400' : 'border-neutral-200 bg-white text-neutral-600'
-            }`}>
-              <span>Specs: {DEFAULT_PROFILE.specs.height} · {DEFAULT_PROFILE.specs.weight}</span>
-              <span>Equity · SAG Eligible</span>
+          </div>
+
+          {/* Compact two-column measurements and professional credentials,
+              matching the About section's specs table. */}
+          <div className={`border p-4 font-mono text-xs ${
+            isDarkMode ? 'border-neutral-800 bg-neutral-950' : 'border-neutral-200 bg-white'
+          }`}>
+            <div className="grid grid-cols-2 gap-3 border-b border-current/10 pb-3">
+              <div className="min-w-0">
+                <span className="block opacity-75">HEIGHT</span>
+                <span className="block mt-1 font-bold">{DEFAULT_PROFILE.specs.height}</span>
+              </div>
+              <div className="min-w-0">
+                <span className="block opacity-75">WEIGHT</span>
+                <span className="block mt-1 font-bold">{DEFAULT_PROFILE.specs.weight}</span>
+              </div>
+            </div>
+            <div className="flex items-start justify-between gap-4 border-b border-current/10 py-3">
+              <span className="shrink-0 opacity-75">CITIZENSHIP</span>
+              <span className="font-bold text-right">{DEFAULT_PROFILE.specs.passports}</span>
+            </div>
+            <div className="flex items-start justify-between gap-4 pt-3">
+              <span className="shrink-0 opacity-75">AFFILIATIONS</span>
+              <span className="font-bold text-right">{DEFAULT_PROFILE.specs.unions}</span>
             </div>
           </div>
         </div>
