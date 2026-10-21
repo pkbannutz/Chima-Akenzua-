@@ -26,3 +26,57 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #888888;
 }
+
+/* Client-logo ticker. Equal-width repeated groups make the leftward loop seamless. */
+.chima-logos-window {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.chima-logos-track {
+  display: flex;
+  width: max-content;
+  animation: chima-logos-scroll 34s linear infinite;
+  will-change: transform;
+}
+
+.chima-logos-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 2rem;
+  padding-right: 2rem;
+}
+
+@keyframes chima-logos-scroll {
+  to { transform: translateX(-50%); }
+}
+
+.chima-logos-track:hover,
+.chima-logos-track:focus-within {
+  animation-play-state: paused;
+}
+
+@media (max-width: 639px) {
+  .chima-logos-group {
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .chima-logos-track {
+    animation-duration: 26s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chima-logos-window {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .chima-logos-track {
+    animation: none;
+    will-change: auto;
+  }
+}

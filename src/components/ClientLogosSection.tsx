@@ -33,36 +33,48 @@ export const ClientLogosSection: React.FC<ClientLogosProps> = ({ isDarkMode }) =
           </p>
         </div>
 
-        {/* Single Small Line of Real Vector Logos */}
-        <div className="mt-6 flex items-center justify-between gap-6 sm:gap-8 overflow-x-auto pb-2 scrollbar-none">
-          {brandLogos.map((brand) => (
-            <a
-              key={brand.name}
-              href={brand.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={brand.name}
-              className="flex items-center justify-center shrink-0 transition-all duration-200 hover:scale-110 cursor-pointer"
-            >
-              {brand.src ? (
-                <img
-                  src={brand.src}
-                  alt={brand.alt}
-                  className={`h-4 sm:h-5 max-w-[70px] sm:max-w-[80px] object-contain transition-opacity duration-200 ${
-                    isDarkMode 
-                      ? 'brightness-0 invert opacity-40 hover:opacity-100' 
-                      : 'brightness-0 opacity-40 hover:opacity-100'
-                  }`}
-                />
-              ) : (
-                <span
-                  className="block whitespace-nowrap font-mono text-[11px] sm:text-xs font-extrabold uppercase tracking-tighter opacity-50 hover:opacity-100"
-                >
-                  {brand.name}
-                </span>
-              )}
-            </a>
-          ))}
+        {/* Continuous client marquee: a second copy makes the loop seamless.
+            The duplicate is omitted from keyboard navigation and screen readers. */}
+        <div className="chima-logos-window mt-6" aria-label="Selected client brands">
+          <div className="chima-logos-track">
+            {[0, 1].map((copyIndex) => (
+              <div
+                key={copyIndex}
+                className="chima-logos-group"
+                aria-hidden={copyIndex === 1 ? true : undefined}
+              >
+                {brandLogos.map((brand) => (
+                  <a
+                    key={brand.name}
+                    href={brand.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={brand.name}
+                    tabIndex={copyIndex === 1 ? -1 : undefined}
+                    className="flex items-center justify-center shrink-0 transition-all duration-200 hover:scale-110 cursor-pointer"
+                  >
+                    {brand.src ? (
+                      <img
+                        src={brand.src}
+                        alt={brand.alt}
+                        className={`h-4 sm:h-5 max-w-[70px] sm:max-w-[80px] object-contain transition-opacity duration-200 ${
+                          isDarkMode
+                            ? 'brightness-0 invert opacity-50 hover:opacity-100'
+                            : 'brightness-0 opacity-50 hover:opacity-100'
+                        }`}
+                      />
+                    ) : (
+                      <span
+                        className="block whitespace-nowrap font-mono text-[11px] sm:text-xs font-extrabold uppercase tracking-tighter opacity-60 hover:opacity-100"
+                      >
+                        {brand.name}
+                      </span>
+                    )}
+                  </a>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>

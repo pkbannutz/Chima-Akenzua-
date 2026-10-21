@@ -10,7 +10,7 @@ export const Footer: React.FC<FooterProps> = ({ isDarkMode, onScrollToTop }) => 
   return (
     <footer className="border-t border-current/15 py-10 font-mono text-xs">
       <div className="mx-auto max-w-5xl px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div>
+        <div className="text-center sm:text-left">
           <span className="font-bold uppercase tracking-widest">CHIMA AKENZUA</span>
           <span className="opacity-60 block mt-1">SAG Nominee · Stunt Performer · Actor</span>
         </div>
