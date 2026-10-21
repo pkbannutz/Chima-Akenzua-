@@ -1,33 +1,26 @@
 import React from 'react';
 
-// Actual Official Vector SVGs downloaded directly
-import appleSvg from '../assets/logos/apple.svg';
-import nikeSvg from '../assets/logos/nike.svg';
+// SVG logos available in the repository. Missing logos use clear text wordmarks.
 import disneySvg from '../assets/logos/disney.svg';
-import redbullSvg from '../assets/logos/redbull.svg';
-import cocacolaSvg from '../assets/logos/cocacola.svg';
 import bbcSvg from '../assets/logos/bbc.svg';
 import amazonSvg from '../assets/logos/amazon.svg';
-import sonySvg from '../assets/logos/sony.svg';
-import skodaSvg from '../assets/logos/skoda.svg';
-import pumaSvg from '../assets/logos/puma.svg';
 
 interface ClientLogosProps {
   isDarkMode: boolean;
 }
 
 export const ClientLogosSection: React.FC<ClientLogosProps> = ({ isDarkMode }) => {
-  const brandLogos = [
-    { name: 'Apple', src: appleSvg, alt: 'Apple', link: 'https://www.apple.com' },
+  const brandLogos: { name: string; alt: string; link: string; src?: string }[] = [
+    { name: 'Apple', alt: 'Apple', link: 'https://www.apple.com' },
     { name: 'Disney', src: disneySvg, alt: 'Disney', link: 'https://www.disney.com' },
-    { name: 'Nike', src: nikeSvg, alt: 'Nike', link: 'https://www.nike.com' },
-    { name: 'Red Bull', src: redbullSvg, alt: 'Red Bull', link: 'https://www.redbull.com' },
-    { name: 'Coca-Cola', src: cocacolaSvg, alt: 'Coca-Cola', link: 'https://www.coca-cola.com' },
+    { name: 'Nike', alt: 'Nike', link: 'https://www.nike.com' },
+    { name: 'Red Bull', alt: 'Red Bull', link: 'https://www.redbull.com' },
+    { name: 'Coca-Cola', alt: 'Coca-Cola', link: 'https://www.coca-cola.com' },
     { name: 'BBC', src: bbcSvg, alt: 'BBC', link: 'https://www.bbc.com' },
     { name: 'Amazon', src: amazonSvg, alt: 'Amazon', link: 'https://www.amazon.com' },
-    { name: 'Sony', src: sonySvg, alt: 'Sony', link: 'https://www.sony.com' },
-    { name: 'Škoda', src: skodaSvg, alt: 'Škoda', link: 'https://www.skoda-auto.com' },
-    { name: 'Puma', src: pumaSvg, alt: 'Puma', link: 'https://www.puma.com' },
+    { name: 'Sony', alt: 'Sony', link: 'https://www.sony.com' },
+    { name: 'Škoda', alt: 'Škoda', link: 'https://www.skoda-auto.com' },
+    { name: 'Puma', alt: 'Puma', link: 'https://www.puma.com' },
   ];
 
   return (
@@ -52,15 +45,23 @@ export const ClientLogosSection: React.FC<ClientLogosProps> = ({ isDarkMode }) =
               title={brand.name}
               className="flex items-center justify-center shrink-0 transition-all duration-200 hover:scale-110 cursor-pointer"
             >
-              <img
-                src={brand.src}
-                alt={brand.alt}
-                className={`h-4 sm:h-5 max-w-[70px] sm:max-w-[80px] object-contain transition-opacity duration-200 ${
-                  isDarkMode 
-                    ? 'brightness-0 invert opacity-40 hover:opacity-100' 
-                    : 'brightness-0 opacity-40 hover:opacity-100'
-                }`}
-              />
+              {brand.src ? (
+                <img
+                  src={brand.src}
+                  alt={brand.alt}
+                  className={`h-4 sm:h-5 max-w-[70px] sm:max-w-[80px] object-contain transition-opacity duration-200 ${
+                    isDarkMode 
+                      ? 'brightness-0 invert opacity-40 hover:opacity-100' 
+                      : 'brightness-0 opacity-40 hover:opacity-100'
+                  }`}
+                />
+              ) : (
+                <span
+                  className="block whitespace-nowrap font-mono text-[11px] sm:text-xs font-extrabold uppercase tracking-tighter opacity-50 hover:opacity-100"
+                >
+                  {brand.name}
+                </span>
+              )}
             </a>
           ))}
         </div>
