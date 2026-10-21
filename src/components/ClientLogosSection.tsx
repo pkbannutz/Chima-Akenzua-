@@ -3,13 +3,13 @@ import React from 'react';
 // SVG logos available in the repository. Missing logos use clear text wordmarks.
 import disneySvg from '../assets/logos/disney.svg';
 import bbcSvg from '../assets/logos/bbc.svg';
-import amazonSvg from '../assets/logos/amazon.svg';
 
 interface ClientLogosProps {
   isDarkMode: boolean;
 }
 
 export const ClientLogosSection: React.FC<ClientLogosProps> = ({ isDarkMode }) => {
+  // Display only brands with named projects or productions in this portfolio.
   const brandLogos: { name: string; alt: string; link: string; src?: string }[] = [
     { name: 'Apple', alt: 'Apple', link: 'https://www.apple.com' },
     { name: 'Disney', src: disneySvg, alt: 'Disney', link: 'https://www.disney.com' },
@@ -17,10 +17,9 @@ export const ClientLogosSection: React.FC<ClientLogosProps> = ({ isDarkMode }) =
     { name: 'Red Bull', alt: 'Red Bull', link: 'https://www.redbull.com' },
     { name: 'Coca-Cola', alt: 'Coca-Cola', link: 'https://www.coca-cola.com' },
     { name: 'BBC', src: bbcSvg, alt: 'BBC', link: 'https://www.bbc.com' },
-    { name: 'Amazon', src: amazonSvg, alt: 'Amazon', link: 'https://www.amazon.com' },
-    { name: 'Sony', alt: 'Sony', link: 'https://www.sony.com' },
     { name: 'Škoda', alt: 'Škoda', link: 'https://www.skoda-auto.com' },
-    { name: 'Puma', alt: 'Puma', link: 'https://www.puma.com' },
+    { name: 'Pepsi', alt: 'Pepsi', link: 'https://www.pepsi.com' },
+    { name: 'National Geographic', alt: 'National Geographic', link: 'https://www.nationalgeographic.com' },
   ];
 
   return (

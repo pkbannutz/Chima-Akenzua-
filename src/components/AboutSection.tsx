@@ -1,5 +1,5 @@
 import React from 'react';
-import { AJK_PHOTO_1, ACTUAL_CHIMA_SIGNATURE, DEFAULT_PROFILE, CLIENT_BRANDS } from '../data/chimaData';
+import { AJK_PHOTO_1, DEFAULT_PROFILE } from '../data/chimaData';
 
 interface AboutProps {
   isDarkMode: boolean;
@@ -67,55 +67,14 @@ export const AboutSection: React.FC<AboutProps> = ({ isDarkMode }) => {
             </div>
           </div>
 
-          {/* Right Column: Authentic Bio Copy from Website & Brand Credits */}
-          <div className="md:col-span-7 space-y-6">
+          {/* Bio begins flush with the portrait's top edge. */}
+          <div className="md:col-span-7 self-start pt-0 md:-mt-1.5">
             <div className="space-y-4 text-sm sm:text-base leading-relaxed opacity-85">
-              <p>
-                {DEFAULT_PROFILE.bio}
-              </p>
+              <p>{DEFAULT_PROFILE.bio}</p>
               {DEFAULT_PROFILE.aboutParagraphs.map((para, idx) => (
-                <p key={idx}>
-                  {para}
-                </p>
+                <p key={idx}>{para}</p>
               ))}
             </div>
-
-            {/* Client Brand Collaborations from Chima's site */}
-            <div className="pt-4 border-t border-current/15">
-              <h3 className="font-mono text-xs uppercase tracking-widest font-bold opacity-90">
-                COLLABORATING BRANDS & STUDIOS
-              </h3>
-              <div className="mt-3 flex flex-wrap gap-2 font-mono text-xs">
-                {CLIENT_BRANDS.map((brand, idx) => (
-                  <span
-                    key={idx}
-                    className={`border px-3 py-1 uppercase tracking-wider ${
-                      isDarkMode ? 'border-neutral-800 bg-neutral-950 text-neutral-300' : 'border-neutral-200 bg-white text-neutral-800'
-                    }`}
-                  >
-                    {brand}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Signature Logo from website */}
-            <div className="pt-6 border-t border-current/15 flex items-center justify-between">
-              <div>
-                <span className="font-mono text-[11px] uppercase tracking-widest opacity-60 block">
-                  Movement Specialist & Creator
-                </span>
-                <span className="font-mono text-xs font-bold uppercase tracking-wider">
-                  Chima Akenzua
-                </span>
-              </div>
-              <img
-                src={ACTUAL_CHIMA_SIGNATURE}
-                alt="Chima Akenzua Signature Wordmark"
-                className={`h-7 w-auto object-contain ${isDarkMode ? 'invert' : ''} opacity-80`}
-              />
-            </div>
-
           </div>
 
         </div>

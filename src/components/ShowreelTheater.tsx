@@ -82,8 +82,13 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
           ))}
         </div>
 
+        {/* Short, Calm Description */}
+        <p className="mt-4 mb-4 text-center text-xs font-mono opacity-70 leading-relaxed max-w-xl mx-auto">
+          {currentReel.description}
+        </p>
+
         {/* Big Clean Cinema Player Screen */}
-        <div className={`mt-6 border relative overflow-hidden bg-black ${
+        <div className={`mt-4 border relative overflow-hidden bg-black ${
           isDarkMode ? 'border-neutral-800' : 'border-neutral-300'
         }`}>
           <div className="relative aspect-16/9 w-full">
@@ -143,10 +148,6 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
           </div>
         </div>
 
-        {/* Short, Calm Description */}
-        <p className="mt-4 text-center text-xs font-mono opacity-70 leading-relaxed max-w-xl mx-auto">
-          {currentReel.description}
-        </p>
 
       </div>
     </section>
