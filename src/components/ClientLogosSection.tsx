@@ -51,7 +51,7 @@ export const ClientLogosSection: React.FC<ClientLogosProps> = ({ isDarkMode }) =
                     rel="noopener noreferrer"
                     title={brand.name}
                     tabIndex={copyIndex === 1 ? -1 : undefined}
-                    className="flex items-center justify-center shrink-0 transition-all duration-200 hover:scale-110 cursor-pointer lg:min-w-[180px]"
+                    className="flex items-center justify-center shrink-0 transition-all duration-200 hover:scale-110 cursor-pointer lg:min-w-[120px]"
                   >
                     {brand.src ? (
                       <img
