@@ -50,6 +50,14 @@
   padding-right: 2rem;
 }
 
+/* Wider spacing on desktop prevents both ends of the logo cycle showing together. */
+@media (min-width: 1024px) {
+  .chima-logos-group {
+    gap: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
 @keyframes chima-logos-scroll {
   to { transform: translateX(-50%); }
 }

@@ -51,13 +51,13 @@ export const ClientLogosSection: React.FC<ClientLogosProps> = ({ isDarkMode }) =
                     rel="noopener noreferrer"
                     title={brand.name}
                     tabIndex={copyIndex === 1 ? -1 : undefined}
-                    className="flex items-center justify-center shrink-0 transition-all duration-200 hover:scale-110 cursor-pointer"
+                    className="flex items-center justify-center shrink-0 transition-all duration-200 hover:scale-110 cursor-pointer lg:min-w-[180px]"
                   >
                     {brand.src ? (
                       <img
                         src={brand.src}
                         alt={brand.alt}
-                        className={`h-4 sm:h-5 max-w-[70px] sm:max-w-[80px] object-contain transition-opacity duration-200 ${
+                        className={`h-4 sm:h-5 lg:h-10 max-w-[70px] sm:max-w-[80px] lg:max-w-[160px] object-contain transition-opacity duration-200 ${
                           isDarkMode
                             ? 'brightness-0 invert opacity-50 hover:opacity-100'
                             : 'brightness-0 opacity-50 hover:opacity-100'
@@ -65,7 +65,7 @@ export const ClientLogosSection: React.FC<ClientLogosProps> = ({ isDarkMode }) =
                       />
                     ) : (
                       <span
-                        className="block whitespace-nowrap font-mono text-[11px] sm:text-xs font-extrabold uppercase tracking-tighter opacity-60 hover:opacity-100"
+                        className="block whitespace-nowrap font-mono text-[11px] sm:text-xs lg:text-2xl font-extrabold uppercase tracking-tighter opacity-60 hover:opacity-100"
                       >
                         {brand.name}
                       </span>
