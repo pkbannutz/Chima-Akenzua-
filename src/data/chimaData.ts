@@ -87,7 +87,7 @@ export const DEFAULT_PROFILE = {
     imdbUrl: "https://www.imdb.com/name/nm4623133/",
     talentManagerUrl: "https://www.thetalentmanager.com/talent/115201/chima-akenzua",
     ajkUrl: "https://www.ajkagency.com/agency/male-dancers-30/chima-akenzua/",
-    instagramUrl: "https://www.instagram.com/chimaparkour/"
+    instagramUrl: "https://www.instagram.com/chimaakenzua/"
   },
   specs: {
     height: "5'11\" (180 cm)",
