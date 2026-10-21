@@ -11,13 +11,31 @@ import { ClientLogosSection } from './components/ClientLogosSection';
 import { Footer } from './components/Footer';
 
 export default function App() {
+  // Light by default on desktop (1024px+), dark on mobile/tablet.
+  // Only a visitor's explicit theme toggle is saved as a preference.
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('ca_theme');
-    return saved !== 'light'; // Default to dark mode
+    if (saved === 'dark') return true;
+    if (saved === 'light') return false;
+    return !window.matchMedia('(min-width: 1024px)').matches;
   });
 
   useEffect(() => {
-    localStorage.setItem('ca_theme', isDarkMode ? 'dark' : 'light');
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const onScreenChange = (event: MediaQueryListEvent) => {
+      if (localStorage.getItem('ca_theme') === null) setIsDarkMode(!event.matches);
+    };
+    desktop.addEventListener('change', onScreenChange);
+    return () => desktop.removeEventListener('change', onScreenChange);
+  }, []);
+
+  const handleToggleTheme = () => {
+    const next = !isDarkMode;
+    localStorage.setItem('ca_theme', next ? 'dark' : 'light');
+    setIsDarkMode(next);
+  };
+
+  useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
       document.body.style.backgroundColor = '#000000';
@@ -43,7 +61,7 @@ export default function App() {
       {/* Top Bar Navigation with Light/Dark Toggle */}
       <Navbar
         isDarkMode={isDarkMode}
-        onToggleTheme={() => setIsDarkMode(!isDarkMode)}
+        onToggleTheme={handleToggleTheme}
         onScrollTo={handleScrollTo}
       />
 
