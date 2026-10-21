@@ -107,12 +107,12 @@ export const PressSection: React.FC<PressProps> = ({ isDarkMode }) => {
                       tabIndex={copyIndex === 1 ? -1 : undefined}
                       onClick={() => setSelectedImage(index)}
                       className={`press-magazine-card group border text-left cursor-zoom-in transition-colors ${
-                        isDarkMode ? 'border-neutral-800 bg-neutral-950 hover:border-neutral-500' : 'border-neutral-200 bg-neutral-50 hover:border-neutral-400'
+                        isDarkMode ? 'border-neutral-800 bg-black hover:border-neutral-500' : 'border-neutral-200 bg-white hover:border-neutral-400'
                       }`}
                       aria-label={`View image ${index + 1}: ${item.description}`}
                     >
                       <div className={`press-magazine-image overflow-hidden flex items-center justify-center ${
-                        isDarkMode ? 'bg-neutral-900' : 'bg-neutral-100'
+                        isDarkMode ? 'bg-black' : 'bg-white'
                       }`}>
                         <img
                           loading="lazy"
@@ -133,7 +133,7 @@ export const PressSection: React.FC<PressProps> = ({ isDarkMode }) => {
               ))}
             </div>
           </div>
-          <p className="mt-3 font-mono text-[10px] opacity-60">Select a photograph to view its original description and full-size image.</p>
+          <p className="mt-3 font-mono text-[10px] lg:text-xs opacity-60">Select a photograph to view it in full-size.</p>
         </div>
 
       </div>
