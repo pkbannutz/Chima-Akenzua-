@@ -50,14 +50,6 @@
   padding-right: 2rem;
 }
 
-/* Compact desktop spacing while retaining large, readable brand marks. */
-@media (min-width: 1024px) {
-  .chima-logos-group {
-    gap: 1rem;
-    padding-right: 1rem;
-  }
-}
-
 @keyframes chima-logos-scroll {
   to { transform: translateX(-50%); }
 }

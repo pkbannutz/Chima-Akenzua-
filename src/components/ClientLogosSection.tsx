@@ -3,6 +3,7 @@ import React from 'react';
 // SVG logos available in the repository. Missing logos use clear text wordmarks.
 import disneySvg from '../assets/logos/disney.svg';
 import bbcSvg from '../assets/logos/bbc.svg';
+import amazonSvg from '../assets/logos/amazon.svg';
 
 interface ClientLogosProps {
   isDarkMode: boolean;
@@ -20,6 +21,9 @@ export const ClientLogosSection: React.FC<ClientLogosProps> = ({ isDarkMode }) =
     { name: 'Škoda', alt: 'Škoda', link: 'https://www.skoda-auto.com' },
     { name: 'Pepsi', alt: 'Pepsi', link: 'https://www.pepsi.com' },
     { name: 'National Geographic', alt: 'National Geographic', link: 'https://www.nationalgeographic.com' },
+    { name: 'Channel 4', alt: 'Channel 4', link: 'https://www.channel4.com' },
+    { name: 'GORE-TEX', alt: 'GORE-TEX', link: 'https://www.gore-tex.com' },
+    { name: 'Amazon', src: amazonSvg, alt: 'Amazon', link: 'https://www.amazon.com' },
   ];
 
   return (
@@ -57,15 +61,15 @@ export const ClientLogosSection: React.FC<ClientLogosProps> = ({ isDarkMode }) =
                       <img
                         src={brand.src}
                         alt={brand.alt}
-                        className={`h-4 sm:h-5 lg:h-10 max-w-[70px] sm:max-w-[80px] lg:max-w-[160px] object-contain transition-opacity duration-200 ${
+                        className={`h-4 sm:h-5 max-w-[70px] sm:max-w-[80px] object-contain transition-opacity duration-200 ${
                           isDarkMode
-                            ? 'brightness-0 invert opacity-50 hover:opacity-100'
-                            : 'brightness-0 opacity-50 hover:opacity-100'
+                            ? 'brightness-0 invert opacity-40 hover:opacity-100'
+                            : 'brightness-0 opacity-40 hover:opacity-100'
                         }`}
                       />
                     ) : (
                       <span
-                        className="block whitespace-nowrap font-mono text-[11px] sm:text-xs lg:text-2xl font-extrabold uppercase tracking-tighter opacity-60 hover:opacity-100"
+                        className="block whitespace-nowrap font-mono text-[11px] sm:text-xs font-extrabold uppercase tracking-tighter opacity-50 hover:opacity-100"
                       >
                         {brand.name}
                       </span>
