@@ -38,7 +38,7 @@
 .chima-logos-track {
   display: flex;
   width: max-content;
-  animation: chima-logos-scroll 34s linear infinite;
+  animation: chima-logos-scroll 26s linear infinite;
   will-change: transform;
 }
 
@@ -54,7 +54,7 @@
   to { transform: translateX(-50%); }
 }
 
-.chima-logos-track:hover,
+/* Keep moving under the mouse on desktop; pause only for keyboard focus. */
 .chima-logos-track:focus-within {
   animation-play-state: paused;
 }
