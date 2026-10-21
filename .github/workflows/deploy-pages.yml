@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -31,6 +31,15 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Prepare local images
         run: node scripts/prepare-pages.mjs
+      - name: Download press gallery originals
+        run: node scripts/download-press-assets.mjs
+      - name: Save downloaded press images in GitHub
+        run: |
+          git add public/press/
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Archive Chima press images [skip ci]'
+            git push origin HEAD:main || echo '::warning::Images will still be deployed, but could not be saved to repository.'
+          fi
       - name: Build
         run: npm run build
       - name: Configure Pages
