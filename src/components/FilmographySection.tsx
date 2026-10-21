@@ -50,7 +50,7 @@ export const FilmographySection: React.FC<FilmographyProps> = ({
             <h2 className="text-xl sm:text-2xl font-mono font-bold uppercase tracking-wider">
               ON SCREEN
             </h2>
-            <p className="mt-1 text-xs font-mono opacity-60 uppercase tracking-widest">
+            <p className="mt-1 whitespace-nowrap font-mono text-[clamp(8px,2.4vw,11px)] tracking-tight opacity-60 uppercase sm:text-xs sm:tracking-widest">
               Filmography, Stunt Performance & Parkour Doubling
             </p>
           </div>
@@ -72,12 +72,12 @@ export const FilmographySection: React.FC<FilmographyProps> = ({
         </div>
 
         {/* Category Filters (Sharp Buttons) */}
-        <div className="mt-6 flex flex-wrap items-center gap-2 font-mono text-xs tracking-wider">
-          {categories.map((cat) => (
+        <div className="mt-6 grid grid-cols-6 gap-2 font-mono tracking-wider sm:flex sm:flex-wrap sm:items-center sm:text-xs">
+          {categories.map((cat, idx) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1.5 border uppercase transition-colors cursor-pointer ${
+              className={`${idx < 3 ? 'col-span-2' : 'col-span-3'} min-w-0 w-full whitespace-nowrap px-1 py-2 text-center text-[10px] border uppercase transition-colors cursor-pointer sm:col-auto sm:w-auto sm:px-3 sm:py-1.5 sm:text-xs ${
                 selectedCategory === cat
                   ? (isDarkMode ? 'bg-white text-black border-white font-bold' : 'bg-black text-white border-black font-bold')
                   : (isDarkMode ? 'border-neutral-800 text-neutral-400 hover:text-white' : 'border-neutral-300 text-neutral-600 hover:text-black')

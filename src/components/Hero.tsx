@@ -42,39 +42,42 @@ export const Hero: React.FC<HeroProps> = ({
           </p>
 
           {/* Simple Clean Actions */}
-          <div className="mt-8 flex flex-wrap items-center gap-3 font-mono text-xs tracking-wider">
+          <div className="mt-8 grid grid-cols-3 gap-1.5 font-mono tracking-wider sm:flex sm:flex-wrap sm:items-center sm:gap-3 sm:text-xs">
             <button
               onClick={onWatchReel}
-              className={`flex items-center gap-2 px-5 py-3 font-bold uppercase border transition-all cursor-pointer ${
+              className={`flex w-full min-w-0 items-center justify-center gap-2 whitespace-nowrap px-1 py-2.5 text-[9px] font-bold uppercase border transition-all cursor-pointer sm:w-auto sm:px-5 sm:py-3 sm:text-xs ${
                 isDarkMode
                   ? 'bg-white text-black border-white hover:bg-transparent hover:text-white'
                   : 'bg-black text-white border-black hover:bg-transparent hover:text-black'
               }`}
             >
-              <Play className="h-3.5 w-3.5 fill-current" />
-              <span>Watch Reels</span>
+              <Play className="hidden h-3.5 w-3.5 fill-current sm:block" />
+              <span className="sm:hidden">REELS</span>
+              <span className="hidden sm:inline">Watch Reels</span>
             </button>
 
             <button
               onClick={onExploreParkour}
-              className={`px-5 py-3 font-semibold uppercase border transition-all cursor-pointer ${
+              className={`w-full min-w-0 whitespace-nowrap px-1 py-2.5 text-[9px] font-semibold uppercase border transition-all cursor-pointer sm:w-auto sm:px-5 sm:py-3 sm:text-xs ${
                 isDarkMode
                   ? 'border-neutral-700 text-neutral-300 hover:border-white hover:text-white bg-neutral-950'
                   : 'border-neutral-300 text-neutral-700 hover:border-black hover:text-black bg-neutral-50'
               }`}
             >
-              Parkour Coordination
+              <span className="sm:hidden">PARKOUR</span>
+              <span className="hidden sm:inline">Parkour Coordination</span>
             </button>
 
             <button
               onClick={onExploreCredits}
-              className={`px-5 py-3 font-semibold uppercase border transition-all cursor-pointer opacity-80 hover:opacity-100 ${
+              className={`w-full min-w-0 whitespace-nowrap px-1 py-2.5 text-[9px] font-semibold uppercase border transition-all cursor-pointer opacity-80 hover:opacity-100 sm:w-auto sm:px-5 sm:py-3 sm:text-xs ${
                 isDarkMode
                   ? 'border-neutral-800 text-neutral-400 hover:border-white hover:text-white'
                   : 'border-neutral-300 text-neutral-600 hover:border-black hover:text-black'
               }`}
             >
-              On Screen (45+)
+              <span className="sm:hidden">ON SCREEN</span>
+              <span className="hidden sm:inline">On Screen (45+)</span>
             </button>
           </div>
 
