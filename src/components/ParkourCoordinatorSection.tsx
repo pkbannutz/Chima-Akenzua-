@@ -67,16 +67,6 @@ export const ParkourCoordinatorSection: React.FC<ParkourCoordinatorProps> = ({
           </div>
         </div>
 
-        {/* Existing monochrome portraits from the Press section, same two-column mobile layout. */}
-        <div className="mt-10 grid grid-cols-2 gap-4">
-          <div className={`border overflow-hidden ${isDarkMode ? 'border-neutral-800' : 'border-neutral-200'}`}>
-            <img src={ACTUAL_ABOUT_PORTRAIT} alt="Chima Akenzua Press Portrait" className="w-full aspect-3/4 object-cover grayscale" />
-          </div>
-          <div className={`border overflow-hidden ${isDarkMode ? 'border-neutral-800' : 'border-neutral-200'}`}>
-            <img src={AJK_PHOTO_2} alt="AJK Agency Movement Profile" className="w-full aspect-3/4 object-cover grayscale" />
-          </div>
-        </div>
-
         {/* Call to Action Bar */}
         <div className={`mt-10 border p-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs ${
           isDarkMode ? 'border-neutral-800 bg-neutral-950' : 'border-neutral-200 bg-white'
@@ -95,6 +85,16 @@ export const ParkourCoordinatorSection: React.FC<ParkourCoordinatorProps> = ({
           >
             INQUIRE AS PARKOUR COORDINATOR
           </button>
+        </div>
+
+        {/* Existing monochrome portraits from the Press section, same two-column mobile layout. */}
+        <div className="mt-10 grid grid-cols-2 gap-4">
+          <div className={`border overflow-hidden ${isDarkMode ? 'border-neutral-800' : 'border-neutral-200'}`}>
+            <img src={ACTUAL_ABOUT_PORTRAIT} alt="Chima Akenzua Press Portrait" className="w-full aspect-3/4 object-cover grayscale" />
+          </div>
+          <div className={`border overflow-hidden ${isDarkMode ? 'border-neutral-800' : 'border-neutral-200'}`}>
+            <img src={AJK_PHOTO_2} alt="AJK Agency Movement Profile" className="w-full aspect-3/4 object-cover grayscale" />
+          </div>
         </div>
 
       </div>
