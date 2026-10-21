@@ -20,7 +20,7 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14 items-center">
         
         {/* Left Typographic Column (col-span-7) */}
-        <div className="md:col-span-7 flex flex-col justify-center">
+        <div className="md:col-span-7 flex flex-col justify-center lg:-translate-y-10">
           <h1 className="text-4xl sm:text-6xl font-black tracking-tighter uppercase font-mono leading-none">
             CHIMA AKENZUA
           </h1>
@@ -34,7 +34,7 @@ export const Hero: React.FC<HeroProps> = ({
             <span>LONDON, UK</span>
           </div>
 
-          <p className="mt-5 text-sm sm:text-base leading-relaxed opacity-80 max-w-xl">
+          <p className="mt-5 lg:mt-8 text-sm sm:text-base leading-relaxed opacity-80 max-w-xl">
             Over 23 years of specialized parkour mastery, movement design, and screen performance. Partnering with film directors, stunt coordinators, and commercial productions to engineer safe, kinetic, and visually unforgettable action sequences.
           </p>
 
