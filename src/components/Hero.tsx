@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, ArrowRight } from 'lucide-react';
+import { Play, MapPin } from 'lucide-react';
 import { ACTUAL_HERO_PORTRAIT, DEFAULT_PROFILE } from '../data/chimaData';
 
 interface HeroProps {
@@ -21,21 +21,18 @@ export const Hero: React.FC<HeroProps> = ({
         
         {/* Left Typographic Column (col-span-7) */}
         <div className="md:col-span-7 flex flex-col justify-center">
-          <div className="flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-widest opacity-70">
-            <span>Parkour Coordinator</span>
-            <span>·</span>
-            <span>Stunt Performer</span>
-            <span>·</span>
-            <span>London, UK</span>
-          </div>
-
-          <h1 className="mt-3 text-4xl sm:text-6xl font-black tracking-tighter uppercase font-mono leading-none">
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tighter uppercase font-mono leading-none">
             CHIMA AKENZUA
           </h1>
 
           <p className="mt-4 text-xs sm:text-sm font-mono tracking-widest uppercase font-bold text-current">
             PARKOUR COORDINATOR · STUNT PERFORMER · MOVEMENT DIRECTOR
           </p>
+
+          <div className="mt-3 inline-flex self-start items-center gap-1.5 font-mono text-[10px] sm:text-xs uppercase tracking-widest opacity-60">
+            <MapPin className="h-3 w-3 shrink-0" strokeWidth={1.6} aria-hidden="true" />
+            <span>LONDON, UK</span>
+          </div>
 
           <p className="mt-5 text-sm sm:text-base leading-relaxed opacity-80 max-w-xl">
             Over 23 years of specialized parkour mastery, movement design, and screen performance. Partnering with film directors, stunt coordinators, and commercial productions to engineer safe, kinetic, and visually unforgettable action sequences.
