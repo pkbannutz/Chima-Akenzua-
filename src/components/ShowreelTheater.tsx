@@ -1,16 +1,21 @@
-import React, { useState, useRef } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { Play, Pause, Volume2, VolumeX, Maximize, Minimize } from 'lucide-react';
 import { SHOWREELS } from '../data/chimaData';
 
 interface ShowreelProps {
   isDarkMode: boolean;
 }
 
+const formatTime = (seconds: number) =>
+  `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
+
 export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [actualDuration, setActualDuration] = useState<string | null>(null);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -19,7 +24,9 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
   const handleSelectTab = (idx: number) => {
     setActiveTab(idx);
     setIsPlaying(false);
-    setActualDuration(null);
+    setDuration(0);
+    setCurrentTime(0);
+    setIsExpanded(false);
     setVideoError(false);
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
@@ -43,12 +50,79 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
     setIsMuted(!isMuted);
   };
 
+  // iPhone Safari supports webkitEnterFullscreen on a video, not the desktop
+  // requestFullscreen API. Keep native playback controls in real fullscreen.
   const handleFullscreen = () => {
-    if (videoRef.current) {
-      if (videoRef.current.requestFullscreen) {
-        videoRef.current.requestFullscreen();
+    if (isExpanded) {
+      setIsExpanded(false);
+      return;
+    }
+    const video = videoRef.current as (HTMLVideoElement & {
+      webkitEnterFullscreen?: () => void;
+    }) | null;
+    if (!video) return;
+    video.controls = true;
+
+    if (typeof video.webkitEnterFullscreen === 'function') {
+      try {
+        video.webkitEnterFullscreen();
+        return;
+      } catch {
+        // Some iOS browsers disable native video fullscreen.
       }
     }
+    if (typeof video.requestFullscreen === 'function') {
+      try {
+        void video.requestFullscreen().catch(() => {
+          video.controls = false;
+          setIsExpanded(true);
+        });
+        return;
+      } catch {
+        // Fall through to a fullscreen-sized player.
+      }
+    }
+    video.controls = false;
+    setIsExpanded(true);
+  };
+
+  useEffect(() => {
+    const resetNativeControls = () => {
+      if (!document.fullscreenElement && videoRef.current) {
+        videoRef.current.controls = false;
+      }
+    };
+    const resetWebkitControls = () => {
+      if (videoRef.current) videoRef.current.controls = false;
+    };
+    document.addEventListener('fullscreenchange', resetNativeControls);
+    document.addEventListener('webkitendfullscreen', resetWebkitControls, true);
+    return () => {
+      document.removeEventListener('fullscreenchange', resetNativeControls);
+      document.removeEventListener('webkitendfullscreen', resetWebkitControls, true);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isExpanded) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsExpanded(false);
+    };
+    document.addEventListener('keydown', onEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', onEscape);
+    };
+  }, [isExpanded]);
+
+  const seekTo = (seconds: number) => {
+    const video = videoRef.current;
+    if (!video || !Number.isFinite(seconds) || duration <= 0) return;
+    const target = Math.max(0, Math.min(seconds, duration));
+    video.currentTime = target;
+    setCurrentTime(target);
   };
 
   return (
@@ -91,10 +165,10 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
         </p>
 
         {/* Big Clean Cinema Player Screen */}
-        <div className={`mt-4 border relative overflow-hidden bg-black ${
-          isDarkMode ? 'border-neutral-800' : 'border-neutral-300'
+        <div className={`border relative overflow-hidden bg-black ${
+          isExpanded ? 'fixed inset-0 z-[100] flex flex-col border-0' : `mt-4 ${isDarkMode ? 'border-neutral-800' : 'border-neutral-300'}`
         }`}>
-          <div className="relative aspect-16/9 w-full">
+          <div className={isExpanded ? 'relative w-full min-h-0 flex-1' : 'relative aspect-16/9 w-full'}>
             <video
               key={currentReel.id}
               ref={videoRef}
@@ -104,16 +178,18 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
               onLoadedMetadata={(event) => {
                 const seconds = event.currentTarget.duration;
                 if (Number.isFinite(seconds) && seconds > 0) {
-                  setActualDuration(`${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`);
+                  setDuration(seconds);
                 }
               }}
               onError={() => setVideoError(true)}
+              onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
+              onSeeking={(event) => setCurrentTime(event.currentTarget.currentTime)}
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
               onEnded={() => setIsPlaying(false)}
               muted={isMuted}
               playsInline
-              className="h-full w-full object-cover"
+              className={`h-full w-full ${isExpanded ? 'object-contain' : 'object-cover'}`}
             />
 
             {/* Play Button Overlay */}
@@ -126,6 +202,27 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
                 <Play className="h-8 w-8 fill-white ml-1" />
               </button>
             )}
+          </div>
+
+          {/* Always-visible seek bar, independent of the fullscreen controls. */}
+          <div className="border-t border-neutral-800 bg-black px-4 pt-3 pb-1 text-white">
+            <input
+              type="range"
+              min={0}
+              max={duration > 0 ? duration : 1}
+              step="0.1"
+              value={duration > 0 ? Math.min(currentTime, duration) : 0}
+              onChange={(event) => seekTo(Number(event.currentTarget.value))}
+              disabled={duration <= 0}
+              aria-label="Seek through reel"
+              aria-valuetext={`${formatTime(currentTime)} of ${duration > 0 ? formatTime(duration) : currentReel.duration}`}
+              className="reel-seek-bar block w-full disabled:cursor-not-allowed disabled:opacity-50"
+              style={{ background: `linear-gradient(to right, white 0%, white ${duration > 0 ? currentTime / duration * 100 : 0}%, #525252 ${duration > 0 ? currentTime / duration * 100 : 0}%, #525252 100%)` }}
+            />
+            <div className="mt-2 flex justify-between font-mono text-[10px] text-neutral-400 tabular-nums">
+              <span>{formatTime(currentTime)}</span>
+              <span>{duration > 0 ? formatTime(duration) : currentReel.duration}</span>
+            </div>
           </div>
 
           {/* Minimal Bottom Bar */}
@@ -150,13 +247,14 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
 
             <div className="flex items-center gap-4 text-neutral-400">
               <span className="hidden sm:inline font-bold text-white">{currentReel.title}</span>
-              <span>{actualDuration ?? currentReel.duration}</span>
+              <span className="hidden sm:inline">{duration > 0 ? formatTime(duration) : currentReel.duration}</span>
               <button
                 onClick={handleFullscreen}
-                className="hover:text-white cursor-pointer"
-                title="Fullscreen"
+                className="hover:text-white cursor-pointer p-1.5 -m-1.5"
+                title={isExpanded ? 'Exit fullscreen' : 'Fullscreen'}
+                aria-label={isExpanded ? 'Exit fullscreen' : 'Enter fullscreen'}
               >
-                <Maximize className="h-4 w-4" />
+                {isExpanded ? <Minimize className="h-5 w-5" /> : <Maximize className="h-5 w-5" />}
               </button>
             </div>
           </div>
