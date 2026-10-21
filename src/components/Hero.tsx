@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({
           </p>
 
           {/* Simple Clean Actions */}
-          <div className="mt-8 grid grid-cols-3 gap-1.5 font-mono tracking-wider sm:flex sm:flex-wrap sm:items-center sm:gap-3 sm:text-xs">
+          <div className="mt-8 grid grid-cols-[0.7fr_1.8fr_1fr] gap-1.5 font-mono tracking-wider sm:flex sm:flex-wrap sm:items-center sm:gap-3 sm:text-xs">
             <button
               onClick={onWatchReel}
               className={`flex w-full min-w-0 items-center justify-center gap-2 whitespace-nowrap px-1 py-2.5 text-[9px] font-bold uppercase border transition-all cursor-pointer sm:w-auto sm:px-5 sm:py-3 sm:text-xs ${
@@ -58,13 +58,13 @@ export const Hero: React.FC<HeroProps> = ({
 
             <button
               onClick={onExploreParkour}
-              className={`w-full min-w-0 whitespace-nowrap px-1 py-2.5 text-[9px] font-semibold uppercase border transition-all cursor-pointer sm:w-auto sm:px-5 sm:py-3 sm:text-xs ${
+              className={`w-full min-w-0 whitespace-nowrap px-1 py-2.5 text-[10px] font-bold uppercase border transition-all cursor-pointer sm:w-auto sm:px-5 sm:py-3 sm:text-xs sm:font-semibold ${
                 isDarkMode
                   ? 'border-neutral-700 text-neutral-300 hover:border-white hover:text-white bg-neutral-950'
                   : 'border-neutral-300 text-neutral-700 hover:border-black hover:text-black bg-neutral-50'
               }`}
             >
-              <span className="sm:hidden">PARKOUR</span>
+              <span className="sm:hidden">PARKOUR COORDINATOR</span>
               <span className="hidden sm:inline">Parkour Coordination</span>
             </button>
 
