@@ -14,7 +14,7 @@ export default function App() {
   // Light by default on desktop (1024px+), dark on mobile/tablet.
   // Only a visitor's explicit theme toggle is saved as a preference.
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem('ca_theme');
+    const saved = localStorage.getItem('ca_theme_preference');
     if (saved === 'dark') return true;
     if (saved === 'light') return false;
     return !window.matchMedia('(min-width: 1024px)').matches;
@@ -23,7 +23,7 @@ export default function App() {
   useEffect(() => {
     const desktop = window.matchMedia('(min-width: 1024px)');
     const onScreenChange = (event: MediaQueryListEvent) => {
-      if (localStorage.getItem('ca_theme') === null) setIsDarkMode(!event.matches);
+      if (localStorage.getItem('ca_theme_preference') === null) setIsDarkMode(!event.matches);
     };
     desktop.addEventListener('change', onScreenChange);
     return () => desktop.removeEventListener('change', onScreenChange);
@@ -31,7 +31,7 @@ export default function App() {
 
   const handleToggleTheme = () => {
     const next = !isDarkMode;
-    localStorage.setItem('ca_theme', next ? 'dark' : 'light');
+    localStorage.setItem('ca_theme_preference', next ? 'dark' : 'light');
     setIsDarkMode(next);
   };
 
