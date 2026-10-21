@@ -40,11 +40,6 @@ jobs:
             git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Archive Chima press images [skip ci]'
             git push origin HEAD:main || echo '::warning::Images will still be deployed, but could not be saved to repository.'
           fi
-      - name: Identify real original Wix reel media
-        continue-on-error: true
-        run: |
-          python -m pip install --quiet --break-system-packages selenium
-          python scripts/probe-wix-reels.py
       - name: Build
         run: npm run build
       - name: Configure Pages

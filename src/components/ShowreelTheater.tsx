@@ -10,6 +10,8 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [actualDuration, setActualDuration] = useState<string | null>(null);
+  const [videoError, setVideoError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const currentReel = SHOWREELS[activeTab];
@@ -17,6 +19,8 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
   const handleSelectTab = (idx: number) => {
     setActiveTab(idx);
     setIsPlaying(false);
+    setActualDuration(null);
+    setVideoError(false);
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
       videoRef.current.pause();
@@ -92,9 +96,20 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
         }`}>
           <div className="relative aspect-16/9 w-full">
             <video
+              key={currentReel.id}
               ref={videoRef}
               src={currentReel.videoSrc}
               poster={currentReel.thumbnail}
+              preload="metadata"
+              onLoadedMetadata={(event) => {
+                const seconds = event.currentTarget.duration;
+                if (Number.isFinite(seconds) && seconds > 0) {
+                  setActualDuration(`${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`);
+                }
+              }}
+              onError={() => setVideoError(true)}
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
               onEnded={() => setIsPlaying(false)}
               muted={isMuted}
               playsInline
@@ -135,7 +150,7 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
 
             <div className="flex items-center gap-4 text-neutral-400">
               <span className="hidden sm:inline font-bold text-white">{currentReel.title}</span>
-              <span>{currentReel.duration}</span>
+              <span>{actualDuration ?? currentReel.duration}</span>
               <button
                 onClick={handleFullscreen}
                 className="hover:text-white cursor-pointer"
@@ -146,8 +161,19 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
             </div>
           </div>
         </div>
-
-
+        {videoError && (
+          <p className="mt-3 text-center font-mono text-xs opacity-75">
+            Video unavailable here. {' '}
+            <a
+              href={activeTab === 0 ? 'https://www.chimaakenzua.com/' : 'https://www.chimaakenzua.com/parkourdirector'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-4 hover:opacity-100"
+            >
+              Watch on Chima's original website
+            </a>.
+          </p>
+        )}
       </div>
     </section>
   );

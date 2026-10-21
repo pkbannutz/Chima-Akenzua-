@@ -56,8 +56,8 @@ export const AJK_PHOTO_3 = "/src/assets/actual/ajk_photo_3.jpg";
 export const AJK_PHOTO_4 = "/src/assets/actual/ajk_photo_4.jpg";
 
 // Authentic Videos Streamed directly from Chima's official site
-export const OFFICIAL_REEL_VIDEO_1 = "https://video.wixstatic.com/video/11062b_eb492c6cb7834f13aee3424d74aceffc/720p/mp4/file.mp4";
-export const OFFICIAL_REEL_VIDEO_2 = "https://video.wixstatic.com/video/11062b_c60c1a75dc1e47aabaec0897964269e9/720p/mp4/file.mp4";
+export const OFFICIAL_REEL_VIDEO_1 = "https://video.wixstatic.com/video/690b17_6e351a97c2e144ca83cb59ce38264d07/1080p/mp4/file.mp4";
+export const OFFICIAL_REEL_VIDEO_2 = "https://video.wixstatic.com/video/690b17_59b7e352c9de4e0399d2fb1bb154b8be/1080p/mp4/file.mp4";
 
 export const DEFAULT_PROFILE = {
   name: "CHIMA AKENZUA",
@@ -148,7 +148,7 @@ export const SHOWREELS: ShowreelItem[] = [
     id: "stunts-screen-reel",
     title: "Official Stunt & Action Reel",
     category: "Stunts & Action Performance",
-    duration: "2:30",
+    duration: "3:16",
     thumbnail: ACTUAL_ACTION_FILM,
     videoSrc: OFFICIAL_REEL_VIDEO_1,
     description: "Feature film and television action showcase featuring live soundstage wirework, tactical film combat, high falls, multi-attacker brawls, and SAG-nominated choreography."
@@ -157,7 +157,7 @@ export const SHOWREELS: ShowreelItem[] = [
     id: "parkour-coordinator-reel",
     title: "Parkour Coordinator Reel",
     category: "Parkour Coordination & Movement",
-    duration: "1:48",
+    duration: "—",
     thumbnail: ACTUAL_PARKOUR_LEAP,
     videoSrc: OFFICIAL_REEL_VIDEO_2,
     description: "Specialist parkour choreography, high-speed architectural trajectory, location movement design, and athlete team coordination across major global productions."
