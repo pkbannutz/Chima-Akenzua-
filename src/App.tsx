@@ -69,7 +69,7 @@ export default function App() {
         {/* PRESS: Editorial Features & Interviews (GQ, Der Spiegel, BBC) */}
         <PressSection isDarkMode={isDarkMode} />
 
-        {/* SHOWREELS: Positioned right after Press with 3 prominent centered buttons */}
+        {/* REELS: Two original stunt and parkour showreels */}
         <ShowreelTheater isDarkMode={isDarkMode} />
 
         {/* About, Specifications & Disciplines */}

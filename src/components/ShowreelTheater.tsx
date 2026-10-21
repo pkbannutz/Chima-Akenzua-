@@ -65,7 +65,7 @@ export const ShowreelTheater: React.FC<ShowreelProps> = ({ isDarkMode }) => {
 
         {/* Two official reel buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 font-mono my-6">
-          {SHOWREELS.slice(0, 2).map((reel, idx) => (
+          {SHOWREELS.map((reel, idx) => (
             <button
               key={reel.id}
               onClick={() => handleSelectTab(idx)}

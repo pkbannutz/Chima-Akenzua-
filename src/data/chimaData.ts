@@ -161,17 +161,7 @@ export const SHOWREELS: ShowreelItem[] = [
     thumbnail: ACTUAL_PARKOUR_LEAP,
     videoSrc: OFFICIAL_REEL_VIDEO_2,
     description: "Specialist parkour choreography, high-speed architectural trajectory, location movement design, and athlete team coordination across major global productions."
-  },
-  {
-    id: "on-screen-drama-reel",
-    title: "On Screen & Acting Reel",
-    category: "On Screen Dramatic Performance",
-    duration: "2:15",
-    thumbnail: ACTUAL_ABOUT_PORTRAIT,
-    videoSrc: OFFICIAL_REEL_VIDEO_1,
-    description: "Commanding physical presence, dramatic dialogue, and nuanced character biomechanics across British television drama and Hollywood features."
-  }
-];
+  }];
 
 export const FILMOGRAPHY: CreditItem[] = [
   {
