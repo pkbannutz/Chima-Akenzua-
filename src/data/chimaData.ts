@@ -421,8 +421,7 @@ export const PRESS_ITEMS: PressItem[] = [
     publication: "THE TALENT MANAGER",
     headline: "Spotlight on Series Creators & Action Performers",
     quote: "One of the most versatile physical performers, parkour coordinators, and factual creators working across UK and US productions.",
-    tag: "Industry Spotlight",
-    url: "https://www.thetalentmanager.com/talent/115201/chima-akenzua"
+    tag: "Industry Spotlight"
   },
   {
     publication: "BBC RADIO 4 & TODAY",
