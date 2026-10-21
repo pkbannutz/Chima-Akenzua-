@@ -1,4 +1,5 @@
 import React from 'react';
+import { ACTUAL_ABOUT_PORTRAIT, AJK_PHOTO_2 } from '../data/chimaData';
 
 interface ParkourCoordinatorProps {
   isDarkMode: boolean;
@@ -63,6 +64,16 @@ export const ParkourCoordinatorSection: React.FC<ParkourCoordinatorProps> = ({
             <p className="mt-2 opacity-70 leading-relaxed">
               Preparing A-list talent and presenters for physical stunts with absolute on-set safety and screen posture.
             </p>
+          </div>
+        </div>
+
+        {/* Existing monochrome portraits from the Press section, same two-column mobile layout. */}
+        <div className="mt-10 grid grid-cols-2 gap-4">
+          <div className={`border overflow-hidden ${isDarkMode ? 'border-neutral-800' : 'border-neutral-200'}`}>
+            <img src={ACTUAL_ABOUT_PORTRAIT} alt="Chima Akenzua Press Portrait" className="w-full aspect-3/4 object-cover grayscale" />
+          </div>
+          <div className={`border overflow-hidden ${isDarkMode ? 'border-neutral-800' : 'border-neutral-200'}`}>
+            <img src={AJK_PHOTO_2} alt="AJK Agency Movement Profile" className="w-full aspect-3/4 object-cover grayscale" />
           </div>
         </div>
 

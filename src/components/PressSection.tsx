@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ExternalLink, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import pressGallery from '../data/pressGallery.json';
-import { PRESS_ITEMS, ACTUAL_ABOUT_PORTRAIT, AJK_PHOTO_2 } from '../data/chimaData';
+import { PRESS_ITEMS } from '../data/chimaData';
 
 interface PressProps {
   isDarkMode: boolean;
@@ -42,11 +42,11 @@ export const PressSection: React.FC<PressProps> = ({ isDarkMode }) => {
           </p>
         </div>
 
-        {/* 2-Column Layout: Editorial Quotes Left + Image Stills Right */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-start font-mono">
+        {/* Preserve the existing press cards; flow them across the available width. */}
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-start font-mono">
           
-          {/* Left Column: Press Articles (col-span-7) */}
-          <div className="md:col-span-7 space-y-6">
+          {/* Editorial feature cards */}
+          <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
             {PRESS_ITEMS.map((item, idx) => (
               <div
                 key={idx}
@@ -84,37 +84,34 @@ export const PressSection: React.FC<PressProps> = ({ isDarkMode }) => {
             ))}
           </div>
 
-          {/* Existing portraits remain. Magazine archive is added alongside press cards. */}
-          <div className="md:col-span-5 space-y-6">
-            <div className="grid grid-cols-2 gap-4">
-              <div className={`border overflow-hidden ${isDarkMode ? 'border-neutral-800' : 'border-neutral-200'}`}>
-                <img src={ACTUAL_ABOUT_PORTRAIT} alt="Chima Akenzua Press Portrait" className="w-full aspect-3/4 object-cover grayscale" />
-              </div>
-              <div className={`border overflow-hidden ${isDarkMode ? 'border-neutral-800' : 'border-neutral-200'}`}>
-                <img src={AJK_PHOTO_2} alt="AJK Agency Movement Profile" className="w-full aspect-3/4 object-cover grayscale" />
-              </div>
-            </div>
+
+        </div>
+
+        {/* Full-width continuously scrolling magazine archive, placed below the Press cards. */}
+        <div className="mt-12 pt-8 border-t border-current/15">
+          <div className="flex items-end justify-between gap-4 border-b border-current/15 pb-3">
             <div>
-              <div className="flex items-end justify-between gap-4 border-b border-current/15 pb-3">
-                <div>
-                  <h3 className="text-base font-mono font-bold tracking-widest uppercase">MAGAZINES</h3>
-                  <p className="mt-1 text-[10px] font-mono uppercase tracking-wider opacity-60">Press images, features &amp; archive</p>
-                </div>
-                <span className="font-mono text-[10px] tracking-wider opacity-60">{pressGallery.length} IMAGES</span>
-              </div>
-              <div className="mt-4 max-h-[660px] overflow-y-auto overscroll-contain pr-1" aria-label="Magazine and press archive gallery">
-                <div className="grid grid-cols-2 gap-3">
+              <h3 className="text-xl sm:text-2xl font-mono font-bold tracking-wider uppercase">MAGAZINES</h3>
+              <p className="mt-1 text-[10px] font-mono uppercase tracking-wider opacity-60">Press images, features &amp; archive</p>
+            </div>
+            <span className="font-mono text-[10px] tracking-wider opacity-60 whitespace-nowrap">{pressGallery.length} IMAGES</span>
+          </div>
+          <div className="press-magazine-window mt-5" aria-label="Magazine and press archive scrolling gallery">
+            <div className="press-magazine-track">
+              {[0, 1].map((copyIndex) => (
+                <div className="press-magazine-group" key={copyIndex} aria-hidden={copyIndex === 1 ? true : undefined}>
                   {pressGallery.map((item, index) => (
                     <button
                       key={item.filename}
                       type="button"
+                      tabIndex={copyIndex === 1 ? -1 : undefined}
                       onClick={() => setSelectedImage(index)}
-                      className={`group min-w-0 border text-left cursor-zoom-in transition-colors ${
+                      className={`press-magazine-card group border text-left cursor-zoom-in transition-colors ${
                         isDarkMode ? 'border-neutral-800 bg-neutral-950 hover:border-neutral-500' : 'border-neutral-200 bg-neutral-50 hover:border-neutral-400'
                       }`}
                       aria-label={`View image ${index + 1}: ${item.description}`}
                     >
-                      <div className={`aspect-4/3 overflow-hidden flex items-center justify-center ${
+                      <div className={`press-magazine-image overflow-hidden flex items-center justify-center ${
                         isDarkMode ? 'bg-neutral-900' : 'bg-neutral-100'
                       }`}>
                         <img
@@ -129,14 +126,14 @@ export const PressSection: React.FC<PressProps> = ({ isDarkMode }) => {
                           className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                         />
                       </div>
-                      <span className="block px-2.5 py-2 font-mono text-[10px] leading-snug opacity-70 line-clamp-2">{item.description}</span>
+                      <span className="block px-3 py-2.5 font-mono text-[10px] leading-relaxed opacity-70 line-clamp-2">{item.description}</span>
                     </button>
                   ))}
                 </div>
-              </div>
-              <p className="mt-3 font-mono text-[10px] opacity-60">Select an image to view its original description and full photograph.</p>
+              ))}
             </div>
           </div>
+          <p className="mt-3 font-mono text-[10px] opacity-60">Select a photograph to view its original description and full-size image.</p>
         </div>
 
       </div>

@@ -18,7 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'PARKOUR COORDINATOR', id: 'parkour-coordinator' },
     { label: 'ON SCREEN', id: 'credits' },
     { label: 'PRESS', id: 'press' },
-    { label: 'SHOWREELS', id: 'showreels' },
+    { label: 'REELS', id: 'showreels' },
     { label: 'ABOUT', id: 'about' },
     { label: 'CONTACT', id: 'contact' },
   ];

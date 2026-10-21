@@ -80,3 +80,56 @@
     will-change: auto;
   }
 }
+
+/* Magazine archive: a seamless, horizontal right-to-left carousel on all screens. */
+.press-magazine-window {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+}
+.press-magazine-track {
+  display: flex;
+  width: max-content;
+  animation: press-magazine-scroll 115s linear infinite;
+  will-change: transform;
+}
+.press-magazine-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: stretch;
+  gap: 14px;
+  padding-right: 14px;
+}
+.press-magazine-card {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  width: 225px;
+  overflow: hidden;
+}
+.press-magazine-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+}
+@keyframes press-magazine-scroll {
+  to { transform: translateX(-50%); }
+}
+/* Stop moving while selecting a picture with a pointer or keyboard. */
+.press-magazine-track:hover,
+.press-magazine-track:focus-within {
+  animation-play-state: paused;
+}
+@media (max-width: 639px) {
+  .press-magazine-card { width: min(56vw, 210px); }
+  .press-magazine-track { animation-duration: 120s; }
+  .press-magazine-group { gap: 12px; padding-right: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .press-magazine-window {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .press-magazine-track { animation: none; will-change: auto; }
+}
